@@ -14,4 +14,6 @@ public interface IUserService {
 	
 	List<Usuario> getUsuarios();
 	
+	void eliminarPorId(Integer userId);
+	
 }

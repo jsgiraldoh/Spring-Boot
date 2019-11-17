@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.test.principal.entities.Usuario;
 import com.test.principal.repositories.IUserService;
@@ -30,5 +31,16 @@ public class UserServiceController {
 	public List<Usuario> findAll() {
 		return userService.getUsuarios();
 	}
+	
+	@RequestMapping(method = RequestMethod.DELETE)
+	public void deleteUser(@RequestBody Usuario usuario) {
+		userService.eliminarPorId(usuario.getId());
+	}
+	
+	@RequestMapping(value = "/buscarPorId", method = RequestMethod.GET)
+	public Usuario findById(@RequestParam Integer id){
+		return userService.buscarPorId(id);
+	}
 
+	
 }

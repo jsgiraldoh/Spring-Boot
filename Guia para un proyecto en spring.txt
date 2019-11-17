@@ -277,6 +277,8 @@ public interface IUserService {
 	Usuario buscarPorId(Integer userId);
 	
 	List<Usuario> getUsuarios();
+
+	void eliminarPorId(Integer userId);
 	
 }
 
@@ -319,6 +321,13 @@ public class UserServiceImpl implements IUserService {
 		return listUsers;
 	}
 
+	@Override
+	public void eliminarPorId(Integer userId) {
+		// TODO Auto-generated method stub
+		userRepository.deleteById(userId);
+		
+	}
+
 }
 
 29) Crear el controlador, UserServiceController
@@ -354,7 +363,58 @@ public class UserServiceController {
 		return userService.getUsuarios();
 	}
 
+	@RequestMapping(method = RequestMethod.DELETE)
+	public void deleteUser(@RequestBody Usuario usuario) {
+		userService.eliminarPorId(usuario.getId());
+	}
+	
+	@RequestMapping(value = "/buscarPorId", method = RequestMethod.GET)
+	public Usuario findById(@RequestParam Integer id){
+		return userService.buscarPorId(id);
+	}
+
 }
+
+30) Agregar el plugin, para crear la imagen de Docker
+
+<properties>
+	<java.version>1.8</java.version>
+	<docker.image.prefix>docker.test</docker.image.prefix>
+</properties>
+
+<build>
+	<plugins>
+
+		<plugin>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-maven-plugin</artifactId>
+		</plugin>
+			
+		<plugin>
+                	<groupId>com.spotify</groupId>
+                	<artifactId>dockerfile-maven-plugin</artifactId>
+                	<version>1.4.9</version>
+                	<configuration>
+                    		<repository>${docker.image.prefix}/${project.artifactId}</repository>
+                	</configuration>
+            	</plugin>
+
+	</plugins>
+</build>
+
+31) Crear una carpeta src/main/docker
+
+32) Crear el archivo Dockerfile
+
+FROM java:8-alpine
+COPY testdocker.jar /home/
+WORKDIR /home/
+ENTRYPOINT java -jar springbootdocker.jar
+EXPOSE 8080
+
+33) Agregar en la étiqueta build
+
+<finalName>testdocker</finalName>
 
 
 

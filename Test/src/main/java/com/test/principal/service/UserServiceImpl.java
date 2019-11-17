@@ -46,4 +46,11 @@ public class UserServiceImpl implements IUserService {
 		return listUsers;
 	}
 
+	@Override
+	public void eliminarPorId(Integer userId) {
+		// TODO Auto-generated method stub
+		userRepository.deleteById(userId);
+		
+	}
+
 }
