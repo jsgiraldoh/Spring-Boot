@@ -29,6 +29,16 @@ services:
       MYSQL_HOST: db:3306
     networks:
       - my_net
+
+  spring:
+    container_name: spring
+    restart: always
+    depends_on:
+      - db
+    environment:
+      - DOCKER_HOST=172.21.0.2
+    networks:
+      - my_net
       
 networks:
   my_net:
