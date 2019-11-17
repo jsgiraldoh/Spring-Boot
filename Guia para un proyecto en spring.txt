@@ -424,5 +424,6 @@ EXPOSE 8080
 
 <finalName>testdocker</finalName>
 
+34) Run -> Run configurations -> Goals: clean install docker:build
 
 
