@@ -29,6 +29,19 @@ services:
       MYSQL_HOST: db:3306
     networks:
       - my_net
+   
+  spring:
+    container_name: spring
+    restart: always
+    depends_on:
+      - db
+    image: test/microservice
+    ports:
+      - "8080:8080"
+    environment:
+      DOCKER_HOST: db
+    networks:
+      - my_net
       
 networks:
   my_net:
