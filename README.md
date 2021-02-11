@@ -492,7 +492,7 @@ spring.datasource.url=jdbc:mysql://${DOCKER_HOST}:3306/test
 38)
 
 ```
-docker inspect mysq`
+docker inspect mysql
 ```
 
 39) Buscar la **dirección ip** del contenedor de ***mysql***
@@ -515,6 +515,6 @@ https://es.wikipedia.org/wiki/Inversi%C3%B3n_de_control
 
 https://stackoverflow.com/questions/130794/what-is-dependency-injection
 
-Curso de Spring Boot en perfil Tic 
+Curso de Spring Boot en perfil Tic
 
 Noviembre 17 del 2019
